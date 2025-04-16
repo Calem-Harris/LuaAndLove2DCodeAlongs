@@ -2,6 +2,17 @@ if arg[2] == "debug" then
     require("lldebugger").start()
 end
 
+function love.load()
+
+end
+
+function love.update(dt)
+
+end
+
+function love.draw()
+
+end
 
 --Sits at the bottom of our scripts
 local love_errorhandler = love.errorhandler
