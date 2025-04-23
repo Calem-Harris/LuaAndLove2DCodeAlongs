@@ -4,15 +4,18 @@ end
 
 function love.load()
     local Player = require "player"
+    local Enemy = require "enemy"
     --my_image = love.graphics.newImage("Images/sheep.png") -- This is how we load an image
     love.graphics.setBackgroundColor(0, 0, 0)
 
     player = Player() -- Creating an instance of our player
+    enemy = Enemy()
 end
 
 function love.update(dt)
     --r1.x = r1.x + 100 * dt
     player:update(dt)
+    enemy:update(dt)
 end
 
 local function checkCollision(a, b)
@@ -49,6 +52,7 @@ end
 
 function love.draw()
     player:draw()
+    enemy:draw()
     -- local mode
     -- if checkCollision(r1, r2) then
     --     mode = "fill"

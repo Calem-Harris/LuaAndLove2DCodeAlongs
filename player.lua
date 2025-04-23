@@ -17,6 +17,14 @@ function Player:update(dt)
         self.x = self.x + self.speed * dt
         print("x: " .. self.x)
     end
+
+    local window_width = love.graphics.getWidth()
+
+    if self.x < 0 then
+        self.x = 0
+    elseif self.x + self.width > window_width then
+        self.x = window_width - self.width
+    end
 end
 
 function Player:draw()
