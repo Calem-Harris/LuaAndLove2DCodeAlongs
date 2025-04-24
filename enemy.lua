@@ -4,8 +4,10 @@ local Enemy = Object:extend()
 function Enemy:new()
     self.image = love.graphics.newImage("Images/snake.png")
     self.x = 325
-    self.y = 450
+    self.y = love.graphics.getHeight() - self.image:getHeight()
     self.speed = 100
+    self.width = self.image:getWidth()
+    self.height = self.image:getHeight()
 end
 
 function Enemy:update(dt)
@@ -16,8 +18,8 @@ function Enemy:update(dt)
     if self.x < 0 then
         self.x = 0
         self.speed = -self.speed -- Reverse direction
-    elseif self.x + self.image:getWidth() > window_width then
-        self.x = window_width - self.image:getWidth()
+    elseif self.x + self.width > window_width then
+        self.x = window_width - self.width
         self.speed = -self.speed
     end
 end

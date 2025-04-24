@@ -1,4 +1,5 @@
 local Object = require "classic"
+local Bullet = require "bullet"
 local Player = Object:extend()
 
 function Player:new()
@@ -7,6 +8,13 @@ function Player:new()
     self.y = 20
     self.speed = 500
     self.width = self.image:getWidth()
+end
+
+function Player:keyPressed(key)
+    if key == "space" then
+        table.insert(table_of_bullets, Bullet(self.x, self.y))
+        print("Bullet Fired!")
+    end
 end
 
 function Player:update(dt)

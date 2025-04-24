@@ -5,54 +5,38 @@ end
 function love.load()
     local Player = require "player"
     local Enemy = require "enemy"
+
     --my_image = love.graphics.newImage("Images/sheep.png") -- This is how we load an image
     love.graphics.setBackgroundColor(0, 0, 0)
 
     player = Player() -- Creating an instance of our player
     enemy = Enemy()
+    table_of_bullets = {}
 end
 
 function love.update(dt)
     --r1.x = r1.x + 100 * dt
     player:update(dt)
     enemy:update(dt)
-end
 
-local function checkCollision(a, b)
-    local a_left = a.x
-    local a_right = a.x + a.width
-    local a_top = a.y
-    local a_bottom = a.y + a.height
+    for i, bullet in ipairs(table_of_bullets) do
+        bullet:update(dt)
 
-    local b_left = b.x
-    local b_right = b.x + b.width
-    local b_top = b.y
-    local b_bottom = b.y + b.height
+        bullet:checkCollision(enemy)
 
-    --If A's right side is further to the left than B's left side
-    if a_right > b_left
-        --And A's left side is further to the right than B's right sides
-        and a_left < b_right
-        --And A's bottom side is further to the bottom than B's top side
-        and a_bottom > b_top
-        --And A's top side is further to the top than B's bottom side
-        and a_top < b_bottom then
-        --There has been a collision
-        return true
-    else
-        --At least one of the above statements was false
-        return false
+        if bullet.dead then
+            table.remove(table_of_bullets, i)
+        end
     end
-
-    -- return a_right > b_left
-    --     and a_left < b_right
-    --     and a_bottom > b_top
-    --     and a_top < b_bottom
 end
 
 function love.draw()
     player:draw()
     enemy:draw()
+
+    for i, bullet in ipairs(table_of_bullets) do
+        bullet:draw()
+    end
     -- local mode
     -- if checkCollision(r1, r2) then
     --     mode = "fill"
@@ -71,7 +55,7 @@ function love.draw()
 end
 
 function love.keypressed(key)
-
+    player:keyPressed(key)
 end
 
 --Sits at the bottom of our scripts
