@@ -14,6 +14,10 @@ function love.draw()
 
 end
 
+function love.keypressed(key)
+
+end
+
 --Sits at the bottom of our scripts
 local love_errorhandler = love.errorhandler
 
