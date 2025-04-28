@@ -3,7 +3,16 @@ if arg[2] == "debug" then
 end
 
 function love.load()
+    song = love.audio.newSource("song.ogg", "stream")
+    song:setLooping(true) -- This will loop the song
 
+    --Method 1: Play a song
+    --love.audio.play(song)
+
+    -- --Method 2: Play a song
+    -- song:play()
+
+    sfx = love.audio.newSource("sfx.ogg", "static")
 end
 
 function love.update(dt)
@@ -12,6 +21,12 @@ end
 
 function love.draw()
 
+end
+
+function love.keypressed(key)
+    if key == "space" then
+        sfx:play()
+    end
 end
 
 --Sits at the bottom of our scripts
